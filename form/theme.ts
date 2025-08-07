@@ -1,5 +1,8 @@
-import { createTheme, type MantineColorsTuple } from "@mantine/core";
+import { createTheme, Button, TextInput , PasswordInput, type MantineColorsTuple } from "@mantine/core";
 import "@mantine/core/styles.css";
+import overrideMantineButtonClassNames from '@/styles/overrides/mantine-button.module.css';
+import overrideMantineInputLabelClassNames from '@/styles/overrides/mantine-input-label.module.css';
+
 
 const primary: MantineColorsTuple = [
   "#d1f4e5",
@@ -95,7 +98,21 @@ export const theme = createTheme({
     info,
   },
   components: {
-    
+    Button: {
+      defaultProps: {
+        classNames: {...overrideMantineButtonClassNames},
+      },
+    },
+    TextInput: {
+      defaultProps: {
+        classNames: {...overrideMantineInputLabelClassNames},
+      },
+    },
+    PasswordInput: {
+      defaultProps: {
+        classNames: {...overrideMantineInputLabelClassNames},
+      },
+    },
   },
   primaryColor: "primary",
   radius: {
