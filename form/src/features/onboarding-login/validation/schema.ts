@@ -3,7 +3,7 @@ import z from "zod";
 export const onboardingLoginSchema = z.object({
   email: z
     .string()
-    .nonempty("required")
+    .nonempty("Required")
     .email({ message: "Email required" })
     .refine(
       (value) =>
@@ -29,3 +29,8 @@ export const onboardingLoginSchema = z.object({
 
 export type OnboardingLoginSchema = z.infer<typeof onboardingLoginSchema>;
 
+export const checkEmailSchema = z.object({
+  pinInput: z.string().length(4,{message: 'Pin'})
+});
+
+export type CheckEmailSchema = z.infer<typeof checkEmailSchema>;

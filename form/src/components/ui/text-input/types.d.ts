@@ -5,14 +5,9 @@ export type InputProps = {
   variant?: Extract<Variants, 'default' | 'filled' | 'outline' | 'unstyled'>;
   size?: SizeVariant;
   radius?: RadiusVariant;
-  leftSection?: ReactNode;
-  rightSection?: ReactNode;
-  leftSectionWidth?: number | string;
-  rightSectionWidth?: number | string;
   required?: boolean;
   className?: string;
   label?: string;
-  description?: string;
   error?: ReactNode | boolean;
   classNames?: {
     input?: string;

@@ -1,13 +1,38 @@
+/* .container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  margin: var(--mantine-spacing-xl);
+}
 .form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40%;
+  margin: var(--mantine-spacing-xl);
+  gap: var(--mantine-spacing-lg);
+} */
+
+.container {
+    display: flex;
     width: 100%;
+    margin-top: var(--mantine-spacing-xl);
+    padding: var(--mantine-spacing-xl);
+}
+
+.form {
     display: flex;
     flex-direction: column;
-    margin: auto;
-    gap: var(--mantine-spacing-lg);
+    align-items: center;
+    width: 100%;
+    margin-top: var(--mantine-spacing-xl);
+    padding: var(--mantine-spacing-xl);
+    gap: var(--mantine-spacing-xl);
 }
 
 .button {
-  width: 100%;
   margin-top: var(--mantine-spacing-lg);
 }
 
@@ -16,11 +41,6 @@
   flex-direction: column;
 }
 
-.inputs {
-  display: flex;
-  flex-direction: row;
-  gap: var(--mantine-spacing-xl);
-  @media (min-width: $mantine-breakpoint-lg) {
-    gap: var(--mantine-spacing-xs);
-  }
+.inputs{
+  width: 30%;
 }
