@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    margin-top: var(--mantine-spacing-xl);
+    padding: var(--mantine-spacing-xl);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    margin-top: var(--mantine-spacing-xl);
+    padding: var(--mantine-spacing-xl);
+    gap: var(--mantine-spacing-xl);
+}
+
+.button {
+  margin-top: var(--mantine-spacing-lg);
+}

@@ -1,21 +1,42 @@
-import type { Preview } from '@storybook/nextjs-vite'
+import '@mantine/core/styles.css';
 
-const preview: Preview = {
-  parameters: {
-    controls: {
-      matchers: {
-       color: /(background|color)$/i,
-       date: /Date$/i,
-      },
+import React, { useEffect } from 'react';
+import { addons } from '@storybook/preview-api';
+import { DARK_MODE_EVENT_NAME } from 'storybook-dark-mode';
+import { MantineProvider, useMantineColorScheme } from '@mantine/core';
+import { theme } from '../theme';
+
+import '../src/styles/globals.css';
+
+export const parameters = {
+  layout: 'fullscreen',
+  options: {
+    showPanel: false,
+  },
+  controls: {
+    matchers: {
+      color: /(background|color)$/i,
+      date: /Date$/,
     },
-
-    a11y: {
-      // 'todo' - show a11y violations in the test UI only
-      // 'error' - fail CI on a11y violations
-      // 'off' - skip a11y checks entirely
-      test: 'todo'
-    }
   },
 };
 
-export default preview;
+const channel = addons.getChannel();
+
+function ColorSchemeWrapper({ children }: { children: React.ReactNode }) {
+  const { setColorScheme } = useMantineColorScheme();
+  const handleColorScheme = (value: boolean) => setColorScheme(value ? 'dark' : 'light');
+
+  useEffect(() => {
+    channel.on(DARK_MODE_EVENT_NAME, handleColorScheme);
+
+    return () => channel.off(DARK_MODE_EVENT_NAME, handleColorScheme);
+  }, [channel]);
+
+  return <>{children}</>;
+}
+
+export const decorators = [
+  (renderStory: any) => <ColorSchemeWrapper>{renderStory()}</ColorSchemeWrapper>,
+  (renderStory: any) => <MantineProvider theme={theme}>{renderStory()}</MantineProvider>,
+];
