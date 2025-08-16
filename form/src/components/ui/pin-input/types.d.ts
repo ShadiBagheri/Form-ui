@@ -16,7 +16,7 @@ export type PinInputProps = {
     gap?: MantineSpacing,
     getInputProps?: ((index: number) => InputProps & ElementProps<"input", "size">),
     hiddenInputProps?: React.ComponentPropsWithoutRef<"input">,
-    id?; string,
+    id?: string,
     inputMode?: "search" | "none" | "text" | "tel" | "url" | "email" | "numeric" | "decimal",
     inputType?: HTMLInputTypeAttribute,
     length?: number,

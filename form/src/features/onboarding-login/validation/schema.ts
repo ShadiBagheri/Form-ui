@@ -30,7 +30,7 @@ export const onboardingLoginSchema = z.object({
 export type OnboardingLoginSchema = z.infer<typeof onboardingLoginSchema>;
 
 export const checkEmailSchema = z.object({
-  pinInput: z.string().length(4,{message: 'Pin'})
+  pinInput: z.string().length(4,{message: 'Pin Required'})
 });
 
 export type CheckEmailSchema = z.infer<typeof checkEmailSchema>;

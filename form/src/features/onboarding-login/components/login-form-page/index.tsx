@@ -2,16 +2,16 @@
 
 import { useRouter } from "next/navigation";
 import { Button, PasswordInput, TextInput } from "@/components/ui";
-import React, { useCallback } from "react";
-import classes from "./styles.module.css";
+import { useCallback, useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import {
   OnboardingLoginSchema,
   onboardingLoginSchema,
 } from "@/features/onboarding-login/validation/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useLoginForm } from "@/features/onboarding-login/hooks/use-login-form-store";
 import { useOnboardingStore } from "@/features/onboarding-login/store/store";
-
+import classes from "./styles.module.css";
 
 const loginSchema = onboardingLoginSchema.pick({
   email: true,
@@ -28,15 +28,22 @@ export const LoginForm: React.FC = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<OnboardingLoginSchema>({
     resolver: zodResolver(loginSchema),
     mode: "onChange",
-    defaultValues: {
-      email: "",
-      password: "",
-    },
+    defaultValues: useLoginForm(),
   });
+
+  const { email, password } = useLoginForm();
+
+  useEffect(() => {
+    reset({
+      email,
+      password,
+    });
+  }, [email, password, reset]);
 
   const getError = useCallback(
     (name: keyof OnboardingLoginSchema) => {
@@ -57,7 +64,7 @@ export const LoginForm: React.FC = () => {
   };
 
   return (
-    <div className="classes.container">
+    <div className={classes.container}>
       <form onSubmit={handleSubmit(submitHandler)} className={classes.form}>
         <TextInput
           label="Email"
@@ -66,7 +73,6 @@ export const LoginForm: React.FC = () => {
           {...fieldProps}
           {...register("email")}
           error={getError("email")}
-          className={classes.inputs}
         />
 
         <PasswordInput
@@ -76,12 +82,11 @@ export const LoginForm: React.FC = () => {
           {...fieldProps}
           {...register("password")}
           error={getError("password")}
-          className={classes.inputs}
         />
 
         <Button
           type="submit"
-          color="primary.5"
+          color="primary.2"
           size="lg"
           radius="md"
           className={classes.button}
@@ -94,7 +99,5 @@ export const LoginForm: React.FC = () => {
 };
 
 export const LoginFormPage: React.FC = () => {
-  return (
-    <LoginForm />
-  );
+  return <LoginForm />;
 };
